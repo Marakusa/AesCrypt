@@ -6,7 +6,7 @@ namespace AesCrypt
     {
         private static void Main(string[] args)
         {
-            if (args.Length == 0)
+            if (args.Length == 0 || args[0] != "e" && args[0] != "d")
             {
                 Console.WriteLine("Please give a parameter (e: encrypt, d: decrypt)");
                 return;
@@ -24,18 +24,17 @@ namespace AesCrypt
                 return;
             }
 
-            if (args[0] == "e")
+            switch (args[0])
             {
-                Console.WriteLine($"Encrypted value:\n{AesUtils.Encrypt(args[1], args[2])}");
-            }
-            else if (args[0] == "d")
-            {
-                Console.WriteLine($"Decrypted value:\n{AesUtils.Decrypt(args[1], args[2])}");
-            }
-            else
-            {
-                Console.WriteLine($"Invalid crypt action: {args[0]}");
-                return;
+                case "e":
+                    Console.WriteLine($"Encrypted value:\n{AesUtils.Encrypt(args[1], args[2])}");
+                    break;
+                case "d":
+                    Console.WriteLine($"Decrypted value:\n{AesUtils.Decrypt(args[1], args[2])}");
+                    break;
+                default:
+                    Console.WriteLine($"Invalid crypt action: {args[0]}");
+                    break;
             }
         }
     }
